@@ -48,10 +48,10 @@ class MyWindow(QWidget):
         fname = QFileDialog.getOpenFileName(self)
         self.label.setText(fname[0])
         print(fname[0])
-        # excel = pd.read_excel(fname)
-        # excelData = pd.DataFrame.to_numpy(excel)
+        excel = pd.read_excel(fname[0])
+        excelData = pd.DataFrame.to_numpy(excel)
 
-        # print(data_np[5][0])
+        print(excelData)
 
 
 if __name__ == '__main__':
