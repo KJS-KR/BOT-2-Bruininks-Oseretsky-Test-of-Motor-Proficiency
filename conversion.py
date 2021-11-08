@@ -3,8 +3,8 @@ import re
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QApplication, QGroupBox, QHBoxLayout, QRadioButton, QWidget, QLineEdit, QLabel, QGridLayout, QMessageBox, QPushButton, QCheckBox, QBoxLayout
 
-class Conversion(QWidget):
 
+class Conversion(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -34,7 +34,7 @@ class Conversion(QWidget):
         self.show()
 
     def createRequiredFields(self):
-        name , age, male, female, birthDate, testDate = "", 0, "", "", 0, 0
+        name, age, male, female, birthDate, testDate = "", 0, "", "", 0, 0
 
         groupBox = QGroupBox('필수입력사항')
 
@@ -50,18 +50,22 @@ class Conversion(QWidget):
 
         grid.addWidget(QLabel('이름 :'), 0, 0)
         name = QLineEdit(self)
+        name.setMaximumWidth(70)
         grid.addWidget(name, 0, 1)
 
         grid.addWidget(QLabel('나이 :'), 1, 0)
         age = QLineEdit(self)
+        age.setMaximumWidth(70)
         grid.addWidget(age, 1, 1)
 
         grid.addWidget(QLabel('생년월일 :'), 2, 0)
         birthDate = QLineEdit(self)
+        birthDate.setMaximumWidth(70)
         grid.addWidget(birthDate, 2, 1)
 
         grid.addWidget(QLabel('검사일 :'), 3, 0)
         testDate = QLineEdit(self)
+        testDate.setMaximumWidth(70)
         grid.addWidget(testDate, 3, 1)
 
         male = QRadioButton("남자")
@@ -81,7 +85,7 @@ class Conversion(QWidget):
         grid.addWidget(gridPart2, 0, 3, 4, 1)
 
         groupBox.setLayout(grid)
-        
+
         return groupBox
 
     def createSubTest1Fields(self):
@@ -89,40 +93,56 @@ class Conversion(QWidget):
         grid = QGridLayout()
 
         grid.addWidget(QLabel('항목'), 0, 0, alignment=QtCore.Qt.AlignCenter)
-        grid.addWidget(QLabel('Raw Score'), 0, 1, alignment=QtCore.Qt.AlignCenter)
-        grid.addWidget(QLabel('Point Score'), 0, 2, alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Raw Score'),
+                       0,
+                       1,
+                       alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Point Score'),
+                       0,
+                       2,
+                       alignment=QtCore.Qt.AlignCenter)
 
         grid.addWidget(QLabel('Filling in Shapes -- Circle : '), 1, 0)
         grid.addWidget(QLabel('Filling in Shapes --Star : '), 2, 0)
-        grid.addWidget(QLabel('Drawing Lines Through Paths -- Crooked : '), 3, 0)
-        grid.addWidget(QLabel('Drawing Lines Through Paths -- Curved : '), 4, 0)
+        grid.addWidget(QLabel('Drawing Lines Through Paths -- Crooked : '), 3,
+                       0)
+        grid.addWidget(QLabel('Drawing Lines Through Paths -- Curved : '), 4,
+                       0)
         grid.addWidget(QLabel('Connecting Dots : '), 5, 0)
         grid.addWidget(QLabel('Folding Paper : '), 6, 0)
         grid.addWidget(QLabel('Cutting Out a Circle : '), 7, 0)
-        grid.addWidget(QLabel('Total Point Score Subtest 1 (max=41) : '), 11, 0)
+        grid.addWidget(QLabel('Total Point Score Subtest 1 (max=41) : '), 11,
+                       0)
 
         subTest1 = []
         for i in range(7):
             subTest1.append(QLineEdit(self))
             subTest1[i].setText("")
+            subTest1[i].setMaximumWidth(70)
         for i in range(7):
-            grid.addWidget(subTest1[i], i+1, 1)
+            grid.addWidget(subTest1[i], i + 1, 1)
 
         convBtn = QPushButton()
         convBtn.setText("변환")
-        grid.addWidget(convBtn, 11, 1)       
+        grid.addWidget(convBtn, 11, 1)
 
         groupBox.setLayout(grid)
 
         return groupBox
-    
+
     def createSubTest2Fields(self):
         groupBox = QGroupBox('Subtest 2: Fine Moter intergration')
         grid = QGridLayout()
 
         grid.addWidget(QLabel('항목'), 0, 0, alignment=QtCore.Qt.AlignCenter)
-        grid.addWidget(QLabel('Raw Score'), 0, 1, alignment=QtCore.Qt.AlignCenter)
-        grid.addWidget(QLabel('Point Score'), 0, 2, alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Raw Score'),
+                       0,
+                       1,
+                       alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Point Score'),
+                       0,
+                       2,
+                       alignment=QtCore.Qt.AlignCenter)
 
         grid.addWidget(QLabel('Copying a Circle : '), 1, 0)
         grid.addWidget(QLabel('Copying a Square : '), 2, 0)
@@ -132,18 +152,19 @@ class Conversion(QWidget):
         grid.addWidget(QLabel('Copying a Diamond : '), 6, 0)
         grid.addWidget(QLabel('Copying a Star : '), 7, 0)
         grid.addWidget(QLabel('Copying Overlapping Pencils : '), 8, 0)
-        grid.addWidget(QLabel('Total Point Score Subtest 2 (max=40) : '), 11, 0)
+        grid.addWidget(QLabel('Total Point Score Subtest 2 (max=40) : '), 11,
+                       0)
 
         subTest2 = []
         for i in range(8):
             subTest2.append(QLineEdit(self))
             subTest2[i].setText("")
         for i in range(8):
-            grid.addWidget(subTest2[i], i+1, 1)
+            grid.addWidget(subTest2[i], i + 1, 1)
 
         convBtn = QPushButton()
         convBtn.setText("변환")
-        grid.addWidget(convBtn, 11, 1)       
+        grid.addWidget(convBtn, 11, 1)
 
         groupBox.setLayout(grid)
 
@@ -154,26 +175,33 @@ class Conversion(QWidget):
         grid = QGridLayout()
 
         grid.addWidget(QLabel('항목'), 0, 0, alignment=QtCore.Qt.AlignCenter)
-        grid.addWidget(QLabel('Raw Score'), 0, 1, alignment=QtCore.Qt.AlignCenter)
-        grid.addWidget(QLabel('Point Score'), 0, 2, alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Raw Score'),
+                       0,
+                       1,
+                       alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Point Score'),
+                       0,
+                       2,
+                       alignment=QtCore.Qt.AlignCenter)
 
         grid.addWidget(QLabel('Making Dots in Circles : '), 1, 0)
         grid.addWidget(QLabel('Transferring Pennies : '), 2, 0)
         grid.addWidget(QLabel('Placing Pegs into a Pegboard : '), 3, 0)
         grid.addWidget(QLabel('Sorting Cards : '), 4, 0)
         grid.addWidget(QLabel('Sorting Blocks : '), 5, 0)
-        grid.addWidget(QLabel('Total Point Score Subtest 3 (max=45) : '), 11, 0)
+        grid.addWidget(QLabel('Total Point Score Subtest 3 (max=45) : '), 11,
+                       0)
 
         subTest3 = []
         for i in range(6):
             subTest3.append(QLineEdit(self))
             subTest3[i].setText("")
         for i in range(6):
-            grid.addWidget(subTest3[i], i+1, 1)
+            grid.addWidget(subTest3[i], i + 1, 1)
 
         convBtn = QPushButton()
         convBtn.setText("변환")
-        grid.addWidget(convBtn, 11, 1)       
+        grid.addWidget(convBtn, 11, 1)
 
         groupBox.setLayout(grid)
 
@@ -184,27 +212,39 @@ class Conversion(QWidget):
         grid = QGridLayout()
 
         grid.addWidget(QLabel('항목'), 0, 0, alignment=QtCore.Qt.AlignCenter)
-        grid.addWidget(QLabel('Raw Score'), 0, 1, alignment=QtCore.Qt.AlignCenter)
-        grid.addWidget(QLabel('Point Score'), 0, 2, alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Raw Score'),
+                       0,
+                       1,
+                       alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Point Score'),
+                       0,
+                       2,
+                       alignment=QtCore.Qt.AlignCenter)
 
-        grid.addWidget(QLabel('Touching Nose with Index Fingers -- Eyes Closed : '), 1, 0)
+        grid.addWidget(
+            QLabel('Touching Nose with Index Fingers -- Eyes Closed : '), 1, 0)
         grid.addWidget(QLabel('Jumping Jacks : '), 2, 0)
-        grid.addWidget(QLabel('Jumping in Place -- Same Sides Synchronized : '), 3, 0)
-        grid.addWidget(QLabel('Jumping in Place -- Opposite Sides Synchronized : '), 4, 0)
+        grid.addWidget(
+            QLabel('Jumping in Place -- Same Sides Synchronized : '), 3, 0)
+        grid.addWidget(
+            QLabel('Jumping in Place -- Opposite Sides Synchronized : '), 4, 0)
         grid.addWidget(QLabel('Pivoting Thumbs and Index Fingers : '), 5, 0)
-        grid.addWidget(QLabel('Tapping Feet and Fingers -- Same Sides Synchronized : '), 6, 0)
-        grid.addWidget(QLabel('Total Point Score Subtest 4 (max=24) : '), 11, 0)
+        grid.addWidget(
+            QLabel('Tapping Feet and Fingers -- Same Sides Synchronized : '),
+            6, 0)
+        grid.addWidget(QLabel('Total Point Score Subtest 4 (max=24) : '), 11,
+                       0)
 
         subTest2 = []
         for i in range(6):
             subTest2.append(QLineEdit(self))
             subTest2[i].setText("")
         for i in range(6):
-            grid.addWidget(subTest2[i], i+1, 1)
+            grid.addWidget(subTest2[i], i + 1, 1)
 
         convBtn = QPushButton()
         convBtn.setText("변환")
-        grid.addWidget(convBtn, 11, 1)       
+        grid.addWidget(convBtn, 11, 1)
 
         groupBox.setLayout(grid)
 
@@ -215,30 +255,47 @@ class Conversion(QWidget):
         grid = QGridLayout()
 
         grid.addWidget(QLabel('항목'), 0, 0, alignment=QtCore.Qt.AlignCenter)
-        grid.addWidget(QLabel('Raw Score'), 0, 1, alignment=QtCore.Qt.AlignCenter)
-        grid.addWidget(QLabel('Point Score'), 0, 2, alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Raw Score'),
+                       0,
+                       1,
+                       alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Point Score'),
+                       0,
+                       2,
+                       alignment=QtCore.Qt.AlignCenter)
 
-        grid.addWidget(QLabel('Standing with Feet Apart on a Line -- Eyes Open: '), 1, 0)
+        grid.addWidget(
+            QLabel('Standing with Feet Apart on a Line -- Eyes Open: '), 1, 0)
         grid.addWidget(QLabel('Walking Forward on a Line : '), 2, 0)
-        grid.addWidget(QLabel('Standing on One Leg on a Line -- Eyes Open : '), 3, 0)
-        grid.addWidget(QLabel('Standing on One Leg on a Line -- Eyes Closed : '), 4, 0)
-        grid.addWidget(QLabel('Walking Forward Heel-to-Toe on a Line : '), 5, 0)
-        grid.addWidget(QLabel('Standing on One Leg on a Line -- Eyes Closed : '), 6, 0)
-        grid.addWidget(QLabel('Standing on One Leg on a Balance Beam -- Eyes Open : '), 7, 0)
-        grid.addWidget(QLabel('Standing Heel-to-Toe on a Balance Beam : '), 8, 0)
-        grid.addWidget(QLabel('Starnding on One Leg on a Balance Beam -- Eyes Closed : '), 9, 0)
-        grid.addWidget(QLabel('Total Point Score Subtest 5 (max=37) : '), 11, 0)
+        grid.addWidget(QLabel('Standing on One Leg on a Line -- Eyes Open : '),
+                       3, 0)
+        grid.addWidget(
+            QLabel('Standing on One Leg on a Line -- Eyes Closed : '), 4, 0)
+        grid.addWidget(QLabel('Walking Forward Heel-to-Toe on a Line : '), 5,
+                       0)
+        grid.addWidget(
+            QLabel('Standing on One Leg on a Line -- Eyes Closed : '), 6, 0)
+        grid.addWidget(
+            QLabel('Standing on One Leg on a Balance Beam -- Eyes Open : '), 7,
+            0)
+        grid.addWidget(QLabel('Standing Heel-to-Toe on a Balance Beam : '), 8,
+                       0)
+        grid.addWidget(
+            QLabel('Starnding on One Leg on a Balance Beam -- Eyes Closed : '),
+            9, 0)
+        grid.addWidget(QLabel('Total Point Score Subtest 5 (max=37) : '), 11,
+                       0)
 
         subTest5 = []
         for i in range(9):
             subTest5.append(QLineEdit(self))
             subTest5[i].setText("")
         for i in range(9):
-            grid.addWidget(subTest5[i], i+1, 1)
+            grid.addWidget(subTest5[i], i + 1, 1)
 
         convBtn = QPushButton()
         convBtn.setText("변환")
-        grid.addWidget(convBtn, 11, 1)       
+        grid.addWidget(convBtn, 11, 1)
 
         groupBox.setLayout(grid)
 
@@ -249,26 +306,34 @@ class Conversion(QWidget):
         grid = QGridLayout()
 
         grid.addWidget(QLabel('항목'), 0, 0, alignment=QtCore.Qt.AlignCenter)
-        grid.addWidget(QLabel('Raw Score'), 0, 1, alignment=QtCore.Qt.AlignCenter)
-        grid.addWidget(QLabel('Point Score'), 0, 2, alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Raw Score'),
+                       0,
+                       1,
+                       alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Point Score'),
+                       0,
+                       2,
+                       alignment=QtCore.Qt.AlignCenter)
 
         grid.addWidget(QLabel('Shuttle Run : '), 1, 0)
-        grid.addWidget(QLabel('Stepping Sideways over a Balance Beam : '), 2, 0)
+        grid.addWidget(QLabel('Stepping Sideways over a Balance Beam : '), 2,
+                       0)
         grid.addWidget(QLabel('One-Legged Stationary Hop : '), 3, 0)
         grid.addWidget(QLabel('One-Legged Side Hop : '), 4, 0)
         grid.addWidget(QLabel('Two-Legged Side Hop : '), 5, 0)
-        grid.addWidget(QLabel('Total Point Score Subtest 6 (max=52) : '), 11, 0)
+        grid.addWidget(QLabel('Total Point Score Subtest 6 (max=52) : '), 11,
+                       0)
 
         subTest6 = []
         for i in range(5):
             subTest6.append(QLineEdit(self))
             subTest6[i].setText("")
         for i in range(5):
-            grid.addWidget(subTest6[i], i+1, 1)
+            grid.addWidget(subTest6[i], i + 1, 1)
 
         convBtn = QPushButton()
         convBtn.setText("변환")
-        grid.addWidget(convBtn, 11, 1)       
+        grid.addWidget(convBtn, 11, 1)
 
         groupBox.setLayout(grid)
 
@@ -279,28 +344,38 @@ class Conversion(QWidget):
         grid = QGridLayout()
 
         grid.addWidget(QLabel('항목'), 0, 0, alignment=QtCore.Qt.AlignCenter)
-        grid.addWidget(QLabel('Raw Score'), 0, 1, alignment=QtCore.Qt.AlignCenter)
-        grid.addWidget(QLabel('Point Score'), 0, 2, alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Raw Score'),
+                       0,
+                       1,
+                       alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Point Score'),
+                       0,
+                       2,
+                       alignment=QtCore.Qt.AlignCenter)
 
-        grid.addWidget(QLabel('Dropping and Catching a Ball -- Both Hands : '), 1, 0)
+        grid.addWidget(QLabel('Dropping and Catching a Ball -- Both Hands : '),
+                       1, 0)
         grid.addWidget(QLabel('Catching a Tossed Ball -- Both Hands : '), 2, 0)
-        grid.addWidget(QLabel('Dropping and Catching a Ball --One Hands : '), 3, 0)
+        grid.addWidget(QLabel('Dropping and Catching a Ball --One Hands : '),
+                       3, 0)
         grid.addWidget(QLabel('Catching a Tossed Ball --One Hands : '), 4, 0)
         grid.addWidget(QLabel('Dribbling a Ball -- One Hand : '), 5, 0)
-        grid.addWidget(QLabel('Dribbling a Ball -- Alternating Hands : '), 6, 0)
+        grid.addWidget(QLabel('Dribbling a Ball -- Alternating Hands : '), 6,
+                       0)
         grid.addWidget(QLabel('Throwing a Ball at a Target : '), 7, 0)
-        grid.addWidget(QLabel('Total Point Score Subtest 7 (max=39) : '), 11, 0)
+        grid.addWidget(QLabel('Total Point Score Subtest 7 (max=39) : '), 11,
+                       0)
 
         subTest7 = []
         for i in range(7):
             subTest7.append(QLineEdit(self))
             subTest7[i].setText("")
         for i in range(7):
-            grid.addWidget(subTest7[i], i+1, 1)
+            grid.addWidget(subTest7[i], i + 1, 1)
 
         convBtn = QPushButton()
         convBtn.setText("변환")
-        grid.addWidget(convBtn, 11, 1)       
+        grid.addWidget(convBtn, 11, 1)
 
         groupBox.setLayout(grid)
 
@@ -311,26 +386,33 @@ class Conversion(QWidget):
         grid = QGridLayout()
 
         grid.addWidget(QLabel('항목'), 0, 0, alignment=QtCore.Qt.AlignCenter)
-        grid.addWidget(QLabel('Raw Score'), 0, 1, alignment=QtCore.Qt.AlignCenter)
-        grid.addWidget(QLabel('Point Score'), 0, 2, alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Raw Score'),
+                       0,
+                       1,
+                       alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Point Score'),
+                       0,
+                       2,
+                       alignment=QtCore.Qt.AlignCenter)
 
         grid.addWidget(QLabel('Standing Long Jump : '), 1, 0)
         grid.addWidget(QLabel('Knee Push-ups : '), 2, 0)
         grid.addWidget(QLabel('Sit-ups : '), 3, 0)
         grid.addWidget(QLabel('Wall Sit : '), 4, 0)
         grid.addWidget(QLabel('V-up : '), 5, 0)
-        grid.addWidget(QLabel('Total Point Score Subtest 8 (max=42) : '), 11, 0)
+        grid.addWidget(QLabel('Total Point Score Subtest 8 (max=42) : '), 11,
+                       0)
 
         subTest8 = []
         for i in range(5):
             subTest8.append(QLineEdit(self))
             subTest8[i].setText("")
         for i in range(5):
-            grid.addWidget(subTest8[i], i+1, 1)
+            grid.addWidget(subTest8[i], i + 1, 1)
 
         convBtn = QPushButton()
         convBtn.setText("변환")
-        grid.addWidget(convBtn, 11, 1)       
+        grid.addWidget(convBtn, 11, 1)
 
         groupBox.setLayout(grid)
 
@@ -345,7 +427,10 @@ class Conversion(QWidget):
         grid.addWidget(QLabel('Standard Score'), 0, 3)
         grid.addWidget(QLabel('1. Find Motor Precision'), 1, 0)
         grid.addWidget(QLabel('2. Find Motor Integration'), 2, 0)
-        grid.addWidget(QLabel('Find Manual Control'), 3, 0, alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Find Manual Control'),
+                       3,
+                       0,
+                       alignment=QtCore.Qt.AlignCenter)
         grid.addWidget(QLabel('5'), 1, 1, alignment=QtCore.Qt.AlignCenter)
         grid.addWidget(QLabel('6'), 1, 2, alignment=QtCore.Qt.AlignCenter)
         grid.addWidget(QLabel('7'), 2, 1, alignment=QtCore.Qt.AlignCenter)
@@ -365,7 +450,10 @@ class Conversion(QWidget):
         grid.addWidget(QLabel('Standard Score'), 0, 3)
         grid.addWidget(QLabel('3. Manual Dexterity'), 1, 0)
         grid.addWidget(QLabel('7. Upper-Limb Coordination'), 2, 0)
-        grid.addWidget(QLabel('Manual Coordination'), 3, 0, alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Manual Coordination'),
+                       3,
+                       0,
+                       alignment=QtCore.Qt.AlignCenter)
         grid.addWidget(QLabel('5'), 1, 1, alignment=QtCore.Qt.AlignCenter)
         grid.addWidget(QLabel('6'), 1, 2, alignment=QtCore.Qt.AlignCenter)
         grid.addWidget(QLabel('7'), 2, 1, alignment=QtCore.Qt.AlignCenter)
@@ -385,7 +473,10 @@ class Conversion(QWidget):
         grid.addWidget(QLabel('Standard Score'), 0, 3)
         grid.addWidget(QLabel('4. Bilateral Coordination'), 1, 0)
         grid.addWidget(QLabel('5. Balance'), 2, 0)
-        grid.addWidget(QLabel('Body Coordination'), 3, 0, alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Body Coordination'),
+                       3,
+                       0,
+                       alignment=QtCore.Qt.AlignCenter)
         grid.addWidget(QLabel('5'), 1, 1, alignment=QtCore.Qt.AlignCenter)
         grid.addWidget(QLabel('6'), 1, 2, alignment=QtCore.Qt.AlignCenter)
         grid.addWidget(QLabel('7'), 2, 1, alignment=QtCore.Qt.AlignCenter)
@@ -405,7 +496,10 @@ class Conversion(QWidget):
         grid.addWidget(QLabel('Standard Score'), 0, 3)
         grid.addWidget(QLabel('6. Running Speed and Agility'), 1, 0)
         grid.addWidget(QLabel('8. Strength Push-up: Knee Full'), 2, 0)
-        grid.addWidget(QLabel('Strength and Agility'), 3, 0, alignment=QtCore.Qt.AlignCenter)
+        grid.addWidget(QLabel('Strength and Agility'),
+                       3,
+                       0,
+                       alignment=QtCore.Qt.AlignCenter)
         grid.addWidget(QLabel('5'), 1, 1, alignment=QtCore.Qt.AlignCenter)
         grid.addWidget(QLabel('6'), 1, 2, alignment=QtCore.Qt.AlignCenter)
         grid.addWidget(QLabel('7'), 2, 1, alignment=QtCore.Qt.AlignCenter)
@@ -425,6 +519,7 @@ class Conversion(QWidget):
 
         groupBox.setLayout(grid)
         return groupBox
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
