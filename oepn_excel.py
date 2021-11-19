@@ -32,9 +32,9 @@ class MyWindow(QWidget):
 
     def setupUI(self):
         self.setGeometry(800, 200, 300, 300)
-        self.setWindowTitle('File Open Test')
+        self.setWindowTitle("File Open Test")
 
-        self.pushButton = QPushButton('File Open')
+        self.pushButton = QPushButton("File Open")
         self.pushButton.clicked.connect(self.pushButtonClicked)
         self.label = QLabel()
 
@@ -54,7 +54,7 @@ class MyWindow(QWidget):
         print(excelData)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MyWindow()
     window.show()

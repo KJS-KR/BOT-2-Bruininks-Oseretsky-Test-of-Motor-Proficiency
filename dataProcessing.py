@@ -137,7 +137,8 @@ class MyWindow(QWidget):
             self.sub1TotalPoint += self.sub1Point[i]
     
         print(self.sub1TotalPoint)
-        # return self.sub1TotalPoint
+
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

@@ -4,17 +4,17 @@ import pandas as pd
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import *
 
+
 class Conversion(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI
 
-
     def initUI(self):
 
         grid = QGridLayout()
 
-        grid.addWidget(self.createExcelDataFields(), 0, 1)
+        # grid.addWidget(self.createExcelDataFields(), 0, 1)
         grid.addWidget(self.createRequiredFields(), 0, 2, 1, 1)
         grid.addWidget(self.createResultFields(), 0, 3)
         grid.addWidget(self.createSubTest1Fields(), 1, 0)
@@ -35,26 +35,26 @@ class Conversion(QWidget):
         self.setLayout(grid)
         self.show()
 
-    def createExcelDataFields(self):
-        groupBox = QGroupBox('파일 선택')
+    # def createExcelDataFields(self):
+    #     groupBox = QGroupBox('파일 선택')
 
-        grid = QGridLayout()
+    #     grid = QGridLayout()
 
-        excelButton = QPushButton('파일 열기(엑셀만)')
-        excelButton.clicked.connect(self.FileButtonClicked)
-        
-        grid.addWidget(excelButton, 0, 0)
+    #     excelButton = QPushButton('파일 열기(엑셀만)')
+    #     excelButton.clicked.connect(self.FileButtonClicked)
 
-        groupBox.setLayout(grid)
+    #     grid.addWidget(excelButton, 0, 0)
 
-        return groupBox
+    #     groupBox.setLayout(grid)
 
-    def FileButtonClicked(self):
-        fname = QFileDialog.getOpenFileName(self)
-        excel = pd.read_excel(fname[0])
-        excelData = pd.DataFrame.to_numpy(excel)
+    #     return groupBox
 
-        print(excelData)
+    # def FileButtonClicked(self):
+    #     fname = QFileDialog.getOpenFileName(self)
+    #     excel = pd.read_excel(fname[0])
+    #     excelData = pd.DataFrame.to_numpy(excel)
+
+    #     print(excelData)
 
     def createRequiredFields(self):
         name, age, male, female, birthDate, testDate = "", 0, "", "", 0, 0
