@@ -5,8 +5,14 @@ from PyQt5 import QtCore
 from PyQt5.QtWidgets import *
 import numpy as np
 
-class MyApp(QWidget):
+from matplotlib.backends.backend_qt5agg import FigureCanvas as FigureCanvas
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+from matplotlib.figure import Figure
+import matplotlib.pyplot as plt
 
+plt.rc('font', family='Malgun Gothic') 
+
+class Conversion(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -32,9 +38,10 @@ class MyApp(QWidget):
         self.mainGrid.addWidget(self.createBodyCoordinationFields(), 3, 2)
         self.mainGrid.addWidget(self.createStrengthAndAgilityFields(), 3, 3)
 
-        self.setWindowTitle('My First Application')
+        self.setWindowTitle('BOT-2')
         self.setGeometry(300, 300, 1000, 1000)
         self.setLayout(self.mainGrid)
+
         self.show()
 
     def createExcelDataFields(self):
@@ -76,6 +83,7 @@ class MyApp(QWidget):
         return self.excelGroupBox
 
     def getExcelData(self):
+        print(self.userData)
         self.requiredData = self.userData[0:6]
         self.sub1Raw = self.userData[6:13]
         self.sub2Raw = self.userData[13:21]
@@ -521,6 +529,7 @@ class MyApp(QWidget):
         age = "{:.3f}".format(self.requiredData[5])
         self.requiredGrid.addWidget(QLabel(self.requiredData[1]), 0, 1) # 이름
         self.requiredGrid.addWidget(QLabel(str(age)), 1, 1) # 나이
+        print(self.requiredData[4])
         self.requiredGrid.addWidget(QLabel(str(self.requiredData[4])[0:10]), 2, 1) # 생년월일
         self.requiredGrid.addWidget(QLabel(str(self.requiredData[3])[0:10]), 3, 1) # 검사일
 
@@ -2403,9 +2412,62 @@ class MyApp(QWidget):
         else:
             pass
 
-        self.RGrid.addWidget(QLabel(str(self.TMC)), 1, 1) 
+        self.RGrid.addWidget(QLabel(str(self.TMC)), 1, 1)
+        Result.show()
+
+class Result(QWidget):
+
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.mainGrid = QGridLayout()
+
+        self.mainGrid.addWidget(self.requiredField(), 0, 0)
+        self.mainGrid.addWidget(self.graph(), 1, 0)
+        # self.mainGrid.addWidget(self.graph(), 0, 1)
+
+        self.setWindowTitle('BOT-2 운동 능력 검사 결과 보고서')
+        self.setGeometry(300, 300, 1000, 1000)
+        self.setLayout(self.mainGrid)
+        self.show()
+
+    def requiredField(self):
+        self.requiredGroupBox = QGroupBox("인적사항")
+
+        self.requiredGrid = QGridLayout()
+
+        self.requiredGroupBox.setLayout(self.requiredGrid)
+
+        return self.requiredGroupBox
+
+    def graph(self):
+        x = np.arange(5)
+        values = [50, 60, 70, 30, 50]
+        category = ["", "미세운동 조절", "손 상지 협응", "신체 협응", "근력 및 민첩성", "총점"]
+
+        self.canvas = FigureCanvas(Figure(figsize=(1, 2)))
+
+        self.ax = self.canvas.figure.subplots()
+        self.ax.bar(x, values, width=0.5)
+        self.ax.set_xticklabels(category)
+        self.ax.axis([-1, 5, 20, 80])
+        self.ax.grid(True, axis='y')
+        self.ax.set_ylabel("30(매우낮음) 40(낮음) 50(평균) 60(높음) 70(매우높음)")
+
+        self.graphGroupBox = QGroupBox("결과지 출력")
+
+        self.graphGrid = QGridLayout()
+
+        self.graphGrid.addWidget(self.canvas, 0, 0)
+
+        self.graphGroupBox.setLayout(self.graphGrid)
+
+        return self.graphGroupBox
 
 if __name__ == '__main__':
-   app = QApplication(sys.argv)
-   ex = MyApp()
-   sys.exit(app.exec_())
+    app1 = QApplication(sys.argv)
+    ex1 = Conversion()
+    ex2 = Result()
+    sys.exit(app1.exec_())
